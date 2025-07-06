@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Calculator Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo"><i class="fas fa-calculator"></i> Calculator Hub</h1>
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropbtn">
+                            <i class="fas fa-graduation-cap"></i> Schools (K–12) <i class="fas fa-caret-down"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="#" data-calculator="basic-calculator">Basic Calculator</a>
+                            <a href="#" data-calculator="scientific-calculator">Scientific Calculator</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropbtn">
+                            <i class="fas fa-university"></i> Colleges and Universities <i class="fas fa-caret-down"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="#" data-calculator="advanced-scientific-calculator">Advanced Scientific Calculator</a>
+                            <a href="#" data-calculator="graphing-calculator">Graphing Calculator</a>
+                            <a href="#" data-calculator="financial-college-calculator">Financial Calculator</a>
+                            <a href="#" data-calculator="statistical-software">Statistical Calculator / Software</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropbtn">
+                            <i class="fas fa-industry"></i> Industry and Professional Use <i class="fas fa-caret-down"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="#" data-calculator="financial-business-calculator">Financial & Business Calculators</a>
+                            <a href="#" data-calculator="engineering-calculator">Engineering Calculators</a>
+                            <a href="#" data-calculator="programmable-calculator">Programmable Calculator</a>
+                            <a href="#" data-calculator="construction-calculator">Construction Calculators</a>
+                            <div class="submenu-divider"></div>
+                            <a href="#" class="submenu-header">Specialty Calculators <i class="fas fa-caret-right"></i></a>
+                            <div class="submenu-content">
+                                <a href="#" data-calculator="medical-calculator">Medical Calculators</a>
+                                <a href="#" data-calculator="statistical-actuarial-calculator">Statistical/Actuarial Calculators</a>
+                                <a href="#" data-calculator="chemistry-calculator">Chemistry Calculators</a>
+                                <a href="#" data-calculator="astronomical-calculator">Astronomical Calculators</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content container">
+        <section id="calculator-display" class="calculator-display">
+            <h2 class="display-title">Welcome to the Calculator Hub!</h2>
+            <p class="display-intro">Select a calculator from the navigation menu above to get started. Previews will appear here when you hover over a calculator type.</p>
+
+            <div id="preview-area" class="preview-area">
+                </div>
+
+            <div id="active-calculator" class="active-calculator">
+                <div class="placeholder-calculator">
+                    <h3>No Calculator Selected</h3>
+                    <p>Your selected calculator will appear here. For a fully functional website, you would implement the calculator's logic (HTML, CSS, JS) within these sections.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Calculator Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
