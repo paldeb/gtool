@@ -116,7 +116,7 @@ body {
     color: #fff;
 }
 
-/* Submenu within dropdown */
+/* Submenu styles (for nested dropdowns) */
 .submenu-divider {
     height: 1px;
     background-color: rgba(255, 255, 255, 0.1);
@@ -132,15 +132,17 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative; /* Crucial: Make submenu-header a positioning context */
 }
 
+/* Base style for submenu content */
 .submenu-content {
     display: none;
     position: absolute;
     background-color: #46627f; /* Even lighter dark blue for submenu */
     min-width: 250px;
     left: 100%; /* Position to the right of the parent */
-    top: 0;
+    top: 0; /* Align with the top of the submenu-header */
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     border-radius: 5px;
     opacity: 0;
@@ -149,12 +151,46 @@ body {
     transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
 }
 
+/* When parent .dropdown-content is hovered, show its immediate .submenu-content */
 .dropdown-content .submenu-header:hover + .submenu-content,
-.submenu-content:hover {
+.dropdown-content .submenu-content:hover { /* This line helps keep the submenu open if mouse moves onto it */
     display: block;
     opacity: 1;
     visibility: visible;
     transform: translateX(0);
+}
+
+/* IMPORTANT: For nested submenus (submenu-content within another submenu-content) */
+/* When a .submenu-content's .submenu-header is hovered, show its immediate .submenu-content sibling */
+.submenu-content .submenu-header:hover + .submenu-content,
+.submenu-content .submenu-content:hover { /* Keeps nested submenu open */
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+    /* Ensure background is distinct for nested levels if desired */
+    background-color: #5d7a96; /* Slightly different background for further nesting */
+}
+
+/* On small screens, stack submenus */
+@media (max-width: 480px) {
+    .submenu-content {
+        position: static; /* Stack dropdowns on small screens */
+        width: 100%;
+        box-shadow: none;
+        border-radius: 0;
+        transform: none;
+        opacity: 1; /* Always visible when active on small screens */
+        visibility: visible;
+        padding-left: 20px; /* Indent submenu items */
+        background-color: #5d7a96; /* Slightly different background for submenu */
+    }
+
+    /* Nested submenu on small screens, indent more */
+    .submenu-content .submenu-content {
+        padding-left: 40px; /* Further indent for nested submenus */
+        background-color: #6e8fa8; /* Even lighter for further nesting */
+    }
 }
 
 
