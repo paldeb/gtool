@@ -3,18 +3,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const calculatorDisplay = document.getElementById('active-calculator');
     const previewArea = document.getElementById('preview-area');
 
-    // Function to close all dropdowns
+    // Function to close all top-level dropdowns
     function closeAllDropdowns() {
         dropdowns.forEach(dropdown => {
             dropdown.classList.remove('active');
+            // For desktop, explicitly hide dropdown-content for smooth close
             const content = dropdown.querySelector('.dropdown-content');
-            if (content) {
-                content.style.display = 'none'; // Ensure display none
+            if (content && window.innerWidth > 767) { // Only apply for desktop view
+                content.style.display = 'none';
             }
         });
     }
 
-    // Toggle dropdown on click
+    // Toggle dropdown on click for top-level navigation items
     dropdowns.forEach(dropdown => {
         const dropbtn = dropdown.querySelector('.dropbtn');
         if (dropbtn) {
@@ -22,62 +23,43 @@ document.addEventListener('DOMContentLoaded', () => {
                 event.preventDefault(); // Prevent default link behavior
                 event.stopPropagation(); // Stop propagation to prevent document click from closing immediately
 
-                // Close other dropdowns
+                // Close other top-level dropdowns
                 dropdowns.forEach(otherDropdown => {
                     if (otherDropdown !== dropdown) {
                         otherDropdown.classList.remove('active');
+                        // For desktop, explicitly hide other dropdown-content
                         const otherContent = otherDropdown.querySelector('.dropdown-content');
-                        if (otherContent) {
+                        if (otherContent && window.innerWidth > 767) {
                             otherContent.style.display = 'none';
                         }
                     }
                 });
 
-                // Toggle current dropdown
+                // Toggle current dropdown's 'active' class
                 dropdown.classList.toggle('active');
+
+                // For desktop, manually manage display property for smooth transitions
                 const content = dropdown.querySelector('.dropdown-content');
-                if (content) {
-                    // Use display block/none for immediate toggle, CSS handles transitions
-                    content.style.display = dropdown.classList.contains('active') ? 'block' : 'none';
+                if (content && window.innerWidth > 767) {
+                    if (dropdown.classList.contains('active')) {
+                        content.style.display = 'block'; // Make it visible for animation
+                    } else {
+                        // After transition, set to none to allow other content to reflow
+                        content.style.display = 'none';
+                    }
                 }
             });
-
-            // Handle submenu hover (for desktop)
-          /*  const submenuHeader = dropdown.querySelector('.submenu-header');
-            if (submenuHeader) {
-                const submenuContent = submenuHeader.nextElementSibling; // Get the submenu-content div
-
-                if (submenuContent) {
-                    // Using mouseenter/mouseleave for hover effect on desktop
-                    submenuHeader.addEventListener('mouseenter', () => {
-                        submenuContent.style.display = 'block';
-                    });
-                    submenuHeader.addEventListener('mouseleave', () => {
-                        // A small delay to allow cursor to enter submenu-content
-                        setTimeout(() => {
-                            if (!submenuContent.matches(':hover')) {
-                                submenuContent.style.display = 'none';
-                            }
-                        }, 50);
-                    });
-                    submenuContent.addEventListener('mouseleave', () => {
-                        submenuContent.style.display = 'none';
-                    });
-                }
-            } */
         }
     });
 
-    // Close dropdowns when clicking outside
+    // Close dropdowns when clicking outside the navigation area
     document.addEventListener('click', (event) => {
         if (!event.target.closest('.main-nav')) {
             closeAllDropdowns();
         }
     });
 
-    // Calculator loading and preview logic
-    const calculatorLinks = document.querySelectorAll('.dropdown-content a[data-calculator]');
-
+    // --- Calculator Data (Comprehensive List) ---
     const calculatorData = {
         // Schools (K–12)
         'basic-calculator': {
@@ -145,6 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     function calculateResult() {
                         try {
+                            // Simple evaluation for demonstration. For a real calculator, use a more robust parser.
                             currentInput = eval(currentInput).toString();
                             updateDisplay();
                         } catch (e) {
@@ -210,25 +193,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             `
         },
-        // Updated Financial Calculators for Colleges and Universities
-        'financial-college-calculator': { // This will now be a main menu item with sub-calculators
-            name: 'Financial Calculators',
-            description: 'A suite of calculators for college students focusing on various financial aspects.',
-            previewHtml: `
-                <div class="calculator-preview-content">
-                    <h4>Financial Calculators Suite</h4>
-                    <p>Explore tools for loans, investments, savings, and more.</p>
-                    <img src="https://via.placeholder.com/150x80?text=Financial+Suite+Preview" alt="Financial Calculators Suite Preview">
-                </div>
-            `,
-            fullHtml: `
-                <div class="placeholder-calculator">
-                    <h3>Financial Calculators (College)</h3>
-                    <p>Please select a specific financial calculator from the dropdown menu.</p>
-                    <p><em>(The selected financial calculator will appear here.)</em></p>
-                </div>
-            `
-        },
         'statistical-software': {
             name: 'Statistical Calculator / Software',
             description: 'Performs hypothesis testing, regression analysis, and probability distributions. Often replaced by software.',
@@ -248,25 +212,6 @@ document.addEventListener('DOMContentLoaded', () => {
             `
         },
         // Industry and Professional Use
-        // Financial & Business Calculators will also be a main menu item with sub-calculators
-        'financial-business-calculator': {
-            name: 'Financial & Business Calculators',
-            description: 'Advanced financial calculations for investment banking, financial planning, and accounting.',
-            previewHtml: `
-                <div class="calculator-preview-content">
-                    <h4>Financial & Business Calculator Preview</h4>
-                    <p>For serious financial professionals.</p>
-                    <img src="https://via.placeholder.com/150x80?text=Biz+Fin+Preview" alt="Financial & Business Calculator Preview">
-                </div>
-            `,
-            fullHtml: `
-                <div class="placeholder-calculator">
-                    <h3>Financial and Business Calculators</h3>
-                    <p>Please select a specific business or financial calculator from the dropdown menu.</p>
-                    <p><em>(The selected business/financial calculator will appear here.)</em></p>
-                </div>
-            `
-        },
         'engineering-calculator': {
             name: 'Engineering Calculators',
             description: 'Extensive functions including unit conversion, differential equations, Laplace transforms.',
@@ -659,218 +604,4 @@ document.addEventListener('DOMContentLoaded', () => {
             name: 'Markup Calculator',
             description: 'Determines the selling price to achieve a desired markup percentage.',
             previewHtml: `<div class="calculator-preview-content"><h4>Markup Calculator Preview</h4><p>Set ideal product pricing.</p><img src="https://via.placeholder.com/150x80?text=Markup+Preview" alt="Markup Calculator Preview"></div>`,
-            fullHtml: `<div class="placeholder-calculator"><h3>Markup Calculator</h3><p>Determine the selling price of a product to achieve a desired markup percentage.</p><p><em>(Calculator logic goes here.)</em></p></div>`
-        },
-        'operating-expense-ratio': {
-            name: 'Operating Expense Ratio',
-            description: 'Calculates the ratio of operating expenses to revenues.',
-            previewHtml: `<div class="calculator-preview-content"><h4>Operating Expense Ratio Preview</h4><p>Assess business efficiency.</p><img src="https://via.placeholder.com/150x80?text=OER+Preview" alt="Operating Expense Ratio Calculator Preview"></div>`,
-            fullHtml: `<div class="placeholder-calculator"><h3>Operating Expense Ratio</h3><p>Calculate the ratio of your business's operating expenses to its revenue.</p><p><em>(Calculator logic goes here.)</em></p></div>`
-        },
-        'working-capital-calculator': {
-            name: 'Working Capital Calculator',
-            description: 'Determines a company\'s short-term liquidity.',
-            previewHtml: `<div class="calculator-preview-content"><h4>Working Capital Calculator Preview</h4><p>Measure business liquidity.</p><img src="https://via.placeholder.com/150x80?text=Working+Capital+Preview" alt="Working Capital Calculator Preview"></div>`,
-            fullHtml: `<div class="placeholder-calculator"><h3>Working Capital Calculator</h3><p>Determine your company's short-term liquidity and operational efficiency.</p><p><em>(Calculator logic goes here.)</em></p></div>`
-        },
-        'inventory-turnover-calculator': {
-            name: 'Inventory Turnover Calculator',
-            description: 'Measures how many times inventory is sold and replaced over a period.',
-            previewHtml: `<div class="calculator-preview-content"><h4>Inventory Turnover Preview</h4><p>Optimize your inventory management.</p><img src="https://via.placeholder.com/150x80?text=Inventory+Turnover+Preview" alt="Inventory Turnover Calculator Preview"></div>`,
-            fullHtml: `<div class="placeholder-calculator"><h3>Inventory Turnover Calculator</h3><p>Measure how efficiently your company manages its inventory.</p><p><em>(Calculator logic goes here.)</em></p></div>`
-        },
-
-        // Real Estate Calculators
-        'mortgage-affordability-calculator': {
-            name: 'Mortgage Affordability Calculator',
-            description: 'Determines the maximum mortgage amount you can afford.',
-            previewHtml: `<div class="calculator-preview-content"><h4>Mortgage Affordability Preview</h4><p>Find out how much home you can afford.</p><img src="https://via.placeholder.com/150x80?text=Mortgage+Afford+Preview" alt="Mortgage Affordability Calculator Preview"></div>`,
-            fullHtml: `<div class="placeholder-calculator"><h3>Mortgage Affordability Calculator</h3><p>Determine the maximum mortgage amount you can comfortably afford.</p><p><em>(Calculator logic goes here.)</em></p></div>`
-        },
-        'rent-vs-buy-calculator': {
-            name: 'Rent vs. Buy Calculator',
-            description: 'Compares the financial implications of renting versus buying a home.',
-            previewHtml: `<div class="calculator-preview-content"><h4>Rent vs. Buy Calculator Preview</h4><p>Make an informed housing decision.</p><img src="https://via.placeholder.com/150x80?text=Rent+Buy+Preview" alt="Rent vs. Buy Calculator Preview"></div>`,
-            fullHtml: `<div class="placeholder-calculator"><h3>Rent vs. Buy Calculator</h3><p>Compare the financial benefits and drawbacks of renting versus buying a home.</p><p><em>(Calculator logic goes here.)</em></p></div>`
-        },
-        'property-tax-estimator': {
-            name: 'Property Tax Estimator',
-            description: 'Estimates annual property taxes based on property value and local rates.',
-            previewHtml: `<div class="calculator-preview-content"><h4>Property Tax Estimator Preview</h4><p>Estimate your property taxes.</p><img src="https://via.placeholder.com/150x80?text=Property+Tax+Preview" alt="Property Tax Estimator Preview"></div>`,
-            fullHtml: `<div class="placeholder-calculator"><h3>Property Tax Estimator</h3><p>Estimate your annual property taxes based on property value and local tax rates.</p><p><em>(Calculator logic goes here.)</em></p></div>`
-        },
-        'home-equity-calculator': {
-            name: 'Home Equity Calculator',
-            description: 'Calculates the current equity in a home.',
-            previewHtml: `<div class="calculator-preview-content"><h4>Home Equity Calculator Preview</h4><p>Discover your home's equity.</p><img src="https://via.placeholder.com/150x80?text=Home+Equity+Preview" alt="Home Equity Calculator Preview"></div>`,
-            fullHtml: `<div class="placeholder-calculator"><h3>Home Equity Calculator</h3><p>Calculate the current equity you have in your home.</p><p><em>(Calculator logic goes here.)</em></p></div>`
-        },
-        'rental-yield-calculator': {
-            name: 'Rental Yield Calculator',
-            description: 'Determines the profitability of a rental property.',
-            previewHtml: `<div class="calculator-preview-content"><h4>Rental Yield Calculator Preview</h4><p>Assess rental property profitability.</p><img src="https://via.placeholder.com/150x80?text=Rental+Yield+Preview" alt="Rental Yield Calculator Preview"></div>`,
-            fullHtml: `<div class="placeholder-calculator"><h3>Rental Yield Calculator</h3><p>Determine the profitability of a rental property investment.</p><p><em>(Calculator logic goes here.)</em></p></div>`
-        },
-        'roi-property-investment': {
-            name: 'ROI on Property Investment',
-            description: 'Calculates the Return on Investment for a property.',
-            previewHtml: `<div class="calculator-preview-content"><h4>ROI on Property Investment Preview</h4><p>Measure your property investment returns.</p><img src="https://via.placeholder.com/150x80?text=ROI+Property+Preview" alt="ROI on Property Investment Calculator Preview"></div>`,
-            fullHtml: `<div class="placeholder-calculator"><h3>ROI on Property Investment</h3><p>Calculate the Return on Investment for your real estate property.</p><p><em>(Calculator logic goes here.)</em></p></div>`
-        },
-
-        // Credit and Debt Calculators
-        'debt-payoff-calculator': {
-            name: 'Debt Payoff Calculator (Avalanche/Snowball)',
-            description: 'Helps plan debt repayment strategies using Avalanche or Snowball methods.',
-            previewHtml: `<div class="calculator-preview-content"><h4>Debt Payoff Calculator Preview</h4><p>Strategize your debt freedom.</p><img src="https://via.placeholder.com/150x80?text=Debt+Payoff+Preview" alt="Debt Payoff Calculator Preview"></div>`,
-            fullHtml: `<div class="placeholder-calculator"><h3>Debt Payoff Calculator (Avalanche/Snowball)</h3><p>Plan your debt repayment strategy using the Avalanche or Snowball method.</p><p><em>(Calculator logic goes here.)</em></p></div>`
-        },
-        'credit-card-interest-calculator': {
-            name: 'Credit Card Interest Calculator',
-            description: 'Estimates interest paid on credit card balances.',
-            previewHtml: `<div class="calculator-preview-content"><h4>Credit Card Interest Calculator Preview</h4><p>Understand credit card costs.</p><img src="https://via.placeholder.com/150x80?text=CC+Interest+Preview" alt="Credit Card Interest Calculator Preview"></div>`,
-            fullHtml: `<div class="placeholder-calculator"><h3>Credit Card Interest Calculator</h3><p>Estimate the interest you will pay on your credit card balances.</p><p><em>(Calculator logic goes here.)</em></p></div>`
-        },
-        'debt-to-income-ratio-calculator': {
-            name: 'Debt-to-Income Ratio Calculator',
-            description: 'Calculates DTI ratio, a key metric for loan approvals.',
-            previewHtml: `<div class="calculator-preview-content"><h4>Debt-to-Income Ratio Preview</h4><p>Assess your financial health for loans.</p><img src="https://via.placeholder.com/150x80?text=DTI+Preview" alt="Debt-to-Income Ratio Calculator Preview"></div>`,
-            fullHtml: `<div class="placeholder-calculator"><h3>Debt-to-Income Ratio Calculator</h3><p>Calculate your Debt-to-Income (DTI) ratio, a key factor for loan approvals.</p><p><em>(Calculator logic goes here.)</em></p></div>`
-        },
-        'minimum-payment-calculator': {
-            name: 'Minimum Payment Calculator',
-            description: 'Shows how long it takes to pay off debt making only minimum payments.',
-            previewHtml: `<div class="calculator-preview-content"><h4>Minimum Payment Calculator Preview</h4><p>See the impact of minimum payments.</p><img src="https://via.placeholder.com/150x80?text=Min+Pay+Preview" alt="Minimum Payment Calculator Preview"></div>`,
-            fullHtml: `<div class="placeholder-calculator"><h3>Minimum Payment Calculator</h3><p>Discover how long it will take to pay off your debt by making only minimum payments.</p><p><em>(Calculator logic goes here.)</em></p></div>`
-        },
-        'credit-score-impact-estimator': {
-            name: 'Credit Score Impact Estimator',
-            description: 'Estimates how financial actions might affect a credit score.',
-            previewHtml: `<div class="calculator-preview-content"><h4>Credit Score Impact Estimator Preview</h4><p>Predict changes to your credit score.</p><img src="https://via.placeholder.com/150x80?text=Credit+Score+Preview" alt="Credit Score Impact Estimator Preview"></div>`,
-            fullHtml: `<div class="placeholder-calculator"><h3>Credit Score Impact Estimator</h3><p>Estimate how various financial actions might impact your credit score.</p><p><em>(Calculator logic goes here.)</em></p></div>`
-        },
-
-        // Currency & Inflation Calculators
-        'currency-converter': {
-            name: 'Currency Converter',
-            description: 'Converts amounts between different currencies.',
-            previewHtml: `<div class="calculator-preview-content"><h4>Currency Converter Preview</h4><p>Convert currencies instantly.</p><img src="https://via.placeholder.com/150x80?text=Currency+Convert+Preview" alt="Currency Converter Preview"></div>`,
-            fullHtml: `<div class="placeholder-calculator"><h3>Currency Converter</h3><p>Convert amounts between different global currencies.</p><p><em>(Calculator logic goes here.)</em></p></div>`
-        },
-        'inflation-adjustment-calculator': {
-            name: 'Inflation Adjustment Calculator',
-            description: 'Adjusts past or future values for inflation.',
-            previewHtml: `<div class="calculator-preview-content"><h4>Inflation Adjustment Calculator Preview</h4><p>Account for changing money value.</p><img src="https://via.placeholder.com/150x80?text=Inflation+Preview" alt="Inflation Adjustment Calculator Preview"></div>`,
-            fullHtml: `<div class="placeholder-calculator"><h3>Inflation Adjustment Calculator</h3><p>Adjust past or future financial values to account for inflation.</p><p><em>(Calculator logic goes here.)</em></p></div>`
-        },
-        'purchasing-power-calculator': {
-            name: 'Purchasing Power Calculator',
-            description: 'Shows how inflation erodes purchasing power over time.',
-            previewHtml: `<div class="calculator-preview-content"><h4>Purchasing Power Calculator Preview</h4><p>Understand money's true value over time.</p><img src="https://via.placeholder.com/150x80?text=Purchasing+Power+Preview" alt="Purchasing Power Calculator Preview"></div>`,
-            fullHtml: `<div class="placeholder-calculator"><h3>Purchasing Power Calculator</h3><p>Illustrate how inflation affects the purchasing power of money over time.</p><p><em>(Calculator logic goes here.)</em></p></div>`
-        },
-        'cost-of-living-comparison': {
-            name: 'Cost of Living Comparison',
-            description: 'Compares the cost of living between different cities or regions.',
-            previewHtml: `<div class="calculator-preview-content"><h4>Cost of Living Comparison Preview</h4><p>Compare living expenses in different places.</p><img src="https://via.placeholder.com/150x80?text=COL+Compare+Preview" alt="Cost of Living Comparison Calculator Preview"></div>`,
-            fullHtml: `<div class="placeholder-calculator"><h3>Cost of Living Comparison</h3><p>Compare the cost of living between various cities or regions.</p><p><em>(Calculator logic goes here.)</em></p></div>`
-        },
-
-        // Education Planning Calculators
-        'college-savings-calculator': {
-            name: 'College Savings Calculator',
-            description: 'Helps plan and project savings for college education.',
-            previewHtml: `<div class="calculator-preview-content"><h4>College Savings Calculator Preview</h4><p>Plan for future education costs.</p><img src="https://via.placeholder.com/150x80?text=College+Savings+Preview" alt="College Savings Calculator Preview"></div>`,
-            fullHtml: `<div class="placeholder-calculator"><h3>College Savings Calculator</h3><p>Plan and project the savings needed for college education expenses.</p><p><em>(Calculator logic goes here.)</em></p></div>`
-        },
-        'education-loan-emi-calculator': {
-            name: 'Education Loan EMI Calculator',
-            description: 'Estimates monthly payments for education loans.',
-            previewHtml: `<div class="calculator-preview-content"><h4>Education Loan EMI Calculator Preview</h4><p>Estimate education loan payments.</p><img src="https://via.placeholder.com/150x80?text=Edu+Loan+EMI+Preview" alt="Education Loan EMI Calculator Preview"></div>`,
-            fullHtml: `<div class="placeholder-calculator"><h3>Education Loan EMI Calculator</h3><p>Calculate the Equated Monthly Installment (EMI) for education loans.</p><p><em>(Calculator logic goes here.)</em></p></div>`
-        },
-        '529-plan-estimator': {
-            name: '529 Plan Estimator (US)',
-            description: 'Projects the growth and benefits of a 529 college savings plan (US-specific).',
-            previewHtml: `<div class="calculator-preview-content"><h4>529 Plan Estimator Preview</h4><p>Project your 529 plan growth (US).</p><img src="https://via.placeholder.com/150x80?text=529+Plan+Preview" alt="529 Plan Estimator Preview"></div>`,
-            fullHtml: `<div class="placeholder-calculator"><h3>529 Plan Estimator (US)</h3><p>Project the growth and benefits of a 529 college savings plan.</p><p><em>(Calculator logic goes here.)</em></p></div>`
-        },
-
-        // Insurance Calculators
-        'life-insurance-needs-calculator': {
-            name: 'Life Insurance Needs Calculator',
-            description: 'Helps determine the adequate amount of life insurance coverage.',
-            previewHtml: `<div class="calculator-preview-content"><h4>Life Insurance Needs Preview</h4><p>Assess your life insurance coverage.</p><img src="https://via.placeholder.com/150x80?text=Life+Insurance+Preview" alt="Life Insurance Needs Calculator Preview"></div>`,
-            fullHtml: `<div class="placeholder-calculator"><h3>Life Insurance Needs Calculator</h3><p>Determine the appropriate amount of life insurance coverage you need.</p><p><em>(Calculator logic goes here.)</em></p></div>`
-        },
-        'health-insurance-premium-estimator': {
-            name: 'Health Insurance Premium Estimator',
-            description: 'Estimates health insurance premiums based on various factors.',
-            previewHtml: `<div class="calculator-preview-content"><h4>Health Insurance Premium Preview</h4><p>Estimate your health insurance costs.</p><img src="https://via.placeholder.com/150x80?text=Health+Premium+Preview" alt="Health Insurance Premium Estimator Preview"></div>`,
-            fullHtml: `<div class="placeholder-calculator"><h3>Health Insurance Premium Estimator</h3><p>Estimate your health insurance premiums based on factors like age, location, and coverage.</p><p><em>(Calculator logic goes here.)</em></p></div>`
-        },
-        'term-plan-calculator': {
-            name: 'Term Plan Calculator',
-            description: 'Calculates premiums for term life insurance plans.',
-            previewHtml: `<div class="calculator-preview-content"><h4>Term Plan Calculator Preview</h4><p>Calculate term life insurance premiums.</p><img src="https://via.placeholder.com/150x80?text=Term+Plan+Preview" alt="Term Plan Calculator Preview"></div>`,
-            fullHtml: `<div class="placeholder-calculator"><h3>Term Plan Calculator</h3><p>Calculate the premiums for various term life insurance plans.</p><p><em>(Calculator logic goes here.)</em></p></div>`
-        },
-        'car-insurance-estimator': {
-            name: 'Car Insurance Estimator',
-            description: 'Provides an estimate for car insurance premiums.',
-            previewHtml: `<div class="calculator-preview-content"><h4>Car Insurance Estimator Preview</h4><p>Estimate your car insurance costs.</p><img src="https://via.placeholder.com/150x80?text=Car+Insurance+Preview" alt="Car Insurance Estimator Preview"></div>`,
-            fullHtml: `<div class="placeholder-calculator"><h3>Car Insurance Estimator</h3><p>Get an estimate for your car insurance premiums based on vehicle details and driving history.</p><p><em>(Calculator logic goes here.)</em></p></div>`
-        }
-    };
-
-    calculatorLinks.forEach(link => {
-        const calculatorId = link.dataset.calculator;
-        const data = calculatorData[calculatorId];
-
-        // Add hover effect for preview
-        link.addEventListener('mouseenter', () => {
-            if (data && data.previewHtml) {
-                previewArea.innerHTML = data.previewHtml;
-            } else {
-                previewArea.innerHTML = `<div class="preview-content"><h4>Preview Not Available</h4><p>No specific preview content defined for ${data ? data.name : 'this calculator'}.</p></div>`;
-            }
-        });
-
-        // Clear preview on mouse leave
-        link.addEventListener('mouseleave', () => {
-            previewArea.innerHTML = `<div>Hover over a calculator type to see its preview here.</div>`;
-        });
-
-
-        // Add click effect to load full calculator
-        link.addEventListener('click', (event) => {
-            event.preventDefault();
-            closeAllDropdowns(); // Close dropdown after selection
-            if (data && data.fullHtml) {
-                calculatorDisplay.innerHTML = data.fullHtml;
-                // Execute any scripts loaded with the HTML (e.g., for the basic calculator)
-                const scripts = calculatorDisplay.querySelectorAll('script');
-                scripts.forEach(oldScript => {
-                    const newScript = document.createElement('script');
-                    Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
-                    newScript.textContent = oldScript.textContent;
-                    oldScript.parentNode.replaceChild(newScript, oldScript);
-                });
-
-                // Scroll to the calculator display section
-                calculatorDisplay.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-            } else {
-                calculatorDisplay.innerHTML = `
-                    <div class="placeholder-calculator">
-                        <h3>Calculator Not Available</h3>
-                        <p>The full interface for ${data ? data.name : 'this calculator'} is not yet implemented.</p>
-                    </div>
-                `;
-            }
-        });
-    });
-
-    // Initialize preview area text
-    previewArea.innerHTML = `<div>Hover over a calculator type to see its preview here.</div>`;
-});
+            fullHtml: `<div class="placeholder-calculator"><h3>Markup Calculator</h3><p>Determine the selling price of a product to achieve a desired
