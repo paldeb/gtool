@@ -136,9 +136,9 @@ html, body {
     transition: transform 0.3s ease;
 }
 
-/* Base style for submenu content */
+/* Base style for ALL submenu-content (hidden by default for desktop, except when parent is hovered) */
 .submenu-content {
-    display: none;
+    display: none; /* Keep hidden by default */
     position: absolute;
     background-color: #46627f; /* Even lighter dark blue for submenu */
     min-width: 280px; /* Match parent dropdown width */
@@ -153,22 +153,38 @@ html, body {
     padding: 10px 0; /* Add padding consistent with main dropdown */
 }
 
-/* When a .submenu-header is hovered, show its immediate .submenu-content sibling */
-.submenu-header:hover > .submenu-content, /* Direct child of hovered submenu-header */
-.submenu-content:hover { /* This allows moving mouse onto the submenu-content to keep it open */
+/* --- THE NEW CRITICAL RULE --- */
+/* When a dropdown-content is active/hovered, its direct submenu-content children should be visible via hover */
+/* This rule ensures the 'Financial Calculators' submenu pops out */
+.dropdown-content .submenu-header:hover > .submenu-content,
+.dropdown-content .submenu-content:hover {
     display: block;
     opacity: 1;
     visibility: visible;
     transform: translateX(0);
 }
 
-/* Style for nested submenu-content (deeper levels) */
-.submenu-content .submenu-content {
+/* For subsequent nested submenus (submenu-content within another submenu-content) */
+/* This ensures "Loan Calculators" and its children pop out when hovered */
+.submenu-content .submenu-header:hover > .submenu-content,
+.submenu-content .submenu-content:hover {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+    /* Keep background distinct for deeper levels if desired */
     background-color: #5d7a96; /* Slightly different background for further nesting */
 }
 
+
+/* Style for even deeper nested submenu-content */
 .submenu-content .submenu-content .submenu-content {
-    background-color: #6e8fa8; /* Even lighter for deeper nesting */
+    background-color: #6e8fa8; /* Even lighter for deepest nesting */
+}
+
+/* Rotate caret on hover for submenus */
+.submenu-header:hover .fa-caret-right {
+    transform: rotate(90deg);
 }
 
 /* Rotate caret on hover for submenus */
