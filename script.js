@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             // Handle submenu hover (for desktop)
-            const submenuHeader = dropdown.querySelector('.submenu-header');
+          /*  const submenuHeader = dropdown.querySelector('.submenu-header');
             if (submenuHeader) {
                 const submenuContent = submenuHeader.nextElementSibling; // Get the submenu-content div
 
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         submenuContent.style.display = 'none';
                     });
                 }
-            }
+            } */
         }
     });
 
