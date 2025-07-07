@@ -3,34 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multi-Calculator Hub</title>
+    <title>Advanced Calculator Platform</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <header class="header">
-        <div class="container">
-            <h1 class="logo"><i class="fas fa-calculator"></i> Calculator Hub</h1>
-           <nav class="main-nav">
-                <ul class="nav-list">
-                    <li class="nav-item dropdown">
-                        <a href="#" class="dropbtn">
-                            <i class="fas fa-graduation-cap"></i> Schools (K–12) <i class="fas fa-caret-down"></i>
-                        </a>
-                        <div class="dropdown-content">
-                            <a href="#" data-calculator="basic-calculator">Basic Calculator</a>
-                            <a href="#" data-calculator="scientific-calculator">Scientific Calculator</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a href="#" class="dropbtn">
-                            <i class="fas fa-university"></i> Colleges and Universities <i class="fas fa-caret-down"></i>
-                        </a>
-                        <div class="dropdown-content">
-                            <a href="#" data-calculator="advanced-scientific-calculator">Advanced Scientific Calculator</a>
-                            <a href="#" data-calculator="graphing-calculator">Graphing Calculator</a>
-                            <a href="#" class="submenu-header">Financial Calculators <i class="fas fa-caret-right"></i></a>
+    <header class="main-header">
+        <div class="logo">
+            <i class="fas fa-calculator"></i> ProCalc Hub
+        </div>
+        <nav class="main-nav">
+            <ul class="nav-list">
+                <li class="nav-item dropdown">
+                    <a href="#" class="dropbtn">
+                        <i class="fas fa-graduation-cap"></i> Schools (K–12) <i class="fas fa-caret-down"></i>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="#" data-calculator="basic-calculator">Basic Calculator</a>
+                        <a href="#" data-calculator="scientific-calculator">Scientific Calculator</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="dropbtn">
+                        <i class="fas fa-university"></i> Colleges and Universities <i class="fas fa-caret-down"></i>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="#" data-calculator="advanced-scientific-calculator">Advanced Scientific Calculator</a>
+                        <a href="#" data-calculator="graphing-calculator">Graphing Calculator</a>
+                        <a href="#" class="submenu-header">Financial Calculators <i class="fas fa-caret-right"></i></a>
+                        <div class="submenu-content">
+                            <a href="#" class="submenu-header">Loan Calculators <i class="fas fa-caret-right"></i></a>
                             <div class="submenu-content">
                                 <a href="#" data-calculator="emi-calculator">EMI (Equated Monthly Installment) Calculator</a>
                                 <a href="#" data-calculator="auto-loan-calculator">Auto Loan Calculator</a>
@@ -40,159 +42,166 @@
                                 <a href="#" data-calculator="loan-comparison-calculator">Loan Comparison Calculator</a>
                                 <a href="#" data-calculator="prepayment-extra-payment-calculator">Prepayment/Extra Payment Calculator</a>
                                 <a href="#" data-calculator="refinance-calculator">Refinance Calculator</a>
-                                <div class="submenu-divider"></div>
-                                <a href="#" class="submenu-header">Investment Calculators <i class="fas fa-caret-right"></i></a>
-                                <div class="submenu-content">
-                                    <a href="#" data-calculator="sip-calculator">SIP Calculator (Systematic Investment Plan)</a>
-                                    <a href="#" data-calculator="lumpsum-investment-calculator">Lumpsum Investment Calculator</a>
-                                    <a href="#" data-calculator="stock-return-calculator">Stock Return Calculator (CAGR, Absolute)</a>
-                                    <a href="#" data-calculator="mutual-fund-return-calculator">Mutual Fund Return Calculator</a>
-                                    <a href="#" data-calculator="bond-yield-calculator">Bond Yield Calculator</a>
-                                    <a href="#" data-calculator="portfolio-growth-calculator">Portfolio Growth Calculator</a>
-                                    <a href="#" data-calculator="dividend-calculator">Dividend Calculator</a>
-                                    <a href="#" data-calculator="capital-gains-tax-calculator-investment">Capital Gains Tax Calculator</a>
-                                    <a href="#" data-calculator="dollar-cost-averaging-calculator">Dollar-Cost Averaging Calculator</a>
-                                </div>
-                                <div class="submenu-divider"></div>
-                                <a href="#" class="submenu-header">Savings Calculators <i class="fas fa-caret-right"></i></a>
-                                <div class="submenu-content">
-                                    <a href="#" data-calculator="future-value-of-savings">Future Value of Savings</a>
-                                    <a href="#" data-calculator="recurring-deposit-calculator">Recurring Deposit Calculator</a>
-                                    <a href="#" data-calculator="compound-interest-calculator">Compound Interest Calculator</a>
-                                    <a href="#" data-calculator="simple-interest-calculator">Simple Interest Calculator</a>
-                                    <a href="#" data-calculator="emergency-fund-calculator">Emergency Fund Calculator</a>
-                                    <a href="#" data-calculator="savings-goal-tracker">Savings Goal Tracker</a>
-                                </div>
-                                <div class="submenu-divider"></div>
-                                <a href="#" class="submenu-header">Retirement Calculators <i class="fas fa-caret-right"></i></a>
-                                <div class="submenu-content">
-                                    <a href="#" data-calculator="retirement-corpus-calculator">Retirement Corpus Calculator</a>
-                                    <a href="#" data-calculator="401k-growth-calculator">401(k) Growth Calculator</a>
-                                    <a href="#" data-calculator="ira-calculator">IRA (Traditional/Roth) Calculator</a>
-                                    <a href="#" data-calculator="pension-calculator">Pension Calculator</a>
-                                    <a href="#" data-calculator="annuity-calculator">Annuity Calculator</a>
-                                    <a href="#" data-calculator="social-security-estimator">Social Security Estimator (US)</a>
-                                </div>
                             </div>
-                            <a href="#" data-calculator="statistical-software">Statistical Calculator / Software</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a href="#" class="dropbtn">
-                            <i class="fas fa-industry"></i> Industry and Professional Use <i class="fas fa-caret-down"></i>
-                        </a>
-                        <div class="dropdown-content">
-                            <a href="#" class="submenu-header">Financial & Business Calculators <i class="fas fa-caret-right"></i></a>
-                            <div class="submenu-content">
-                                <a href="#" class="submenu-header">Budget and Expense <i class="fas fa-caret-right"></i></a>
-                                <div class="submenu-content">
-                                    <a href="#" data-calculator="monthly-budget-planner">Monthly Budget Planner</a>
-                                    <a href="#" data-calculator="expense-split-calculator">Expense Split Calculator</a>
-                                    <a href="#" data-calculator="zero-based-budget-calculator">Zero-Based Budget Calculator</a>
-                                    <a href="#" data-calculator="50-30-20-rule-calculator">50/30/20 Rule Calculator</a>
-                                    <a href="#" data-calculator="cash-flow-calculator">Cash Flow Calculator</a>
-                                </div>
-                                <div class="submenu-divider"></div>
-                                <a href="#" class="submenu-header">Tax Calculators <i class="fas fa-caret-right"></i></a>
-                                <div class="submenu-content">
-                                    <a href="#" data-calculator="income-tax-calculator">Income Tax Calculator</a>
-                                    <a href="#" data-calculator="capital-gains-tax-calculator-general">Capital Gains Tax Calculator</a>
-                                    <a href="#" data-calculator="gst-vat-calculator">GST/VAT Calculator</a>
-                                    <a href="#" data-calculator="self-employment-tax-estimator">Self-Employment Tax Estimator</a>
-                                    <a href="#" data-calculator="tax-withholding-estimator">Tax Withholding Estimator (W-4 Tool for US)</a>
-                                </div>
-                                <div class="submenu-divider"></div>
-                                <a href="#" class="submenu-header">Business Finance Calculators <i class="fas fa-caret-right"></i></a>
-                                <div class="submenu-content">
-                                    <a href="#" data-calculator="break-even-analysis">Break-Even Analysis</a>
-                                    <a href="#" data-calculator="profit-margin-calculator">Profit Margin Calculator</a>
-                                    <a href="#" data-calculator="markup-calculator">Markup Calculator</a>
-                                    <a href="#" data-calculator="operating-expense-ratio">Operating Expense Ratio</a>
-                                    <a href="#" data-calculator="working-capital-calculator">Working Capital Calculator</a>
-                                    <a href="#" data-calculator="inventory-turnover-calculator">Inventory Turnover Calculator</a>
-                                </div>
-                                <div class="submenu-divider"></div>
-                                <a href="#" class="submenu-header">Real Estate Calculators <i class="fas fa-caret-right"></i></a>
-                                <div class="submenu-content">
-                                    <a href="#" data-calculator="mortgage-affordability-calculator">Mortgage Affordability Calculator</a>
-                                    <a href="#" data-calculator="rent-vs-buy-calculator">Rent vs. Buy Calculator</a>
-                                    <a href="#" data-calculator="property-tax-estimator">Property Tax Estimator</a>
-                                    <a href="#" data-calculator="home-equity-calculator">Home Equity Calculator</a>
-                                    <a href="#" data-calculator="rental-yield-calculator">Rental Yield Calculator</a>
-                                    <a href="#" data-calculator="roi-property-investment">ROI on Property Investment</a>
-                                </div>
-                                <div class="submenu-divider"></div>
-                                <a href="#" class="submenu-header">Credit and Debt Calculators <i class="fas fa-caret-right"></i></a>
-                                <div class="submenu-content">
-                                    <a href="#" data-calculator="debt-payoff-calculator">Debt Payoff Calculator (Avalanche/Snowball)</a>
-                                    <a href="#" data-calculator="credit-card-interest-calculator">Credit Card Interest Calculator</a>
-                                    <a href="#" data-calculator="debt-to-income-ratio-calculator">Debt-to-Income Ratio Calculator</a>
-                                    <a href="#" data-calculator="minimum-payment-calculator">Minimum Payment Calculator</a>
-                                    <a href="#" data-calculator="credit-score-impact-estimator">Credit Score Impact Estimator</a>
-                                </div>
-                                <div class="submenu-divider"></div>
-                                <a href="#" class="submenu-header">Currency & Inflation Calculators <i class="fas fa-caret-right"></i></a>
-                                <div class="submenu-content">
-                                    <a href="#" data-calculator="currency-converter">Currency Converter</a>
-                                    <a href="#" data-calculator="inflation-adjustment-calculator">Inflation Adjustment Calculator</a>
-                                    <a href="#" data-calculator="purchasing-power-calculator">Purchasing Power Calculator</a>
-                                    <a href="#" data-calculator="cost-of-living-comparison">Cost of Living Comparison</a>
-                                </div>
-                                <div class="submenu-divider"></div>
-                                <a href="#" class="submenu-header">Education Planning Calculators <i class="fas fa-caret-right"></i></a>
-                                <div class="submenu-content">
-                                    <a href="#" data-calculator="college-savings-calculator">College Savings Calculator</a>
-                                    <a href="#" data-calculator="education-loan-emi-calculator">Education Loan EMI Calculator</a>
-                                    <a href="#" data-calculator="529-plan-estimator">529 Plan Estimator (US)</a>
-                                </div>
-                                <div class="submenu-divider"></div>
-                                <a href="#" class="submenu-header">Insurance Calculators <i class="fas fa-caret-right"></i></a>
-                                <div class="submenu-content">
-                                    <a href="#" data-calculator="life-insurance-needs-calculator">Life Insurance Needs Calculator</a>
-                                    <a href="#" data-calculator="health-insurance-premium-estimator">Health Insurance Premium Estimator</a>
-                                    <a href="#" data-calculator="term-plan-calculator">Term Plan Calculator</a>
-                                    <a href="#" data-calculator="car-insurance-estimator">Car Insurance Estimator</a>
-                                </div>
-                            </div>
-                            <a href="#" data-calculator="engineering-calculator">Engineering Calculators</a>
-                            <a href="#" data-calculator="programmable-calculator">Programmable Calculator</a>
-                            <a href="#" data-calculator="construction-calculator">Construction Calculators</a>
                             <div class="submenu-divider"></div>
-                            <a href="#" class="submenu-header">Specialty Calculators <i class="fas fa-caret-right"></i></a>
+
+                            <a href="#" class="submenu-header">Investment Calculators <i class="fas fa-caret-right"></i></a>
                             <div class="submenu-content">
-                                <a href="#" data-calculator="medical-calculator">Medical Calculators</a>
-                                <a href="#" data-calculator="statistical-actuarial-calculator">Statistical/Actuarial Calculators</a>
-                                <a href="#" data-calculator="chemistry-calculator">Chemistry Calculators</a>
-                                <a href="#" data-calculator="astronomical-calculator">Astronomical Calculators</a>
+                                <a href="#" data-calculator="sip-calculator">SIP Calculator (Systematic Investment Plan)</a>
+                                <a href="#" data-calculator="lumpsum-investment-calculator">Lumpsum Investment Calculator</a>
+                                <a href="#" data-calculator="stock-return-calculator">Stock Return Calculator (CAGR, Absolute)</a>
+                                <a href="#" data-calculator="mutual-fund-return-calculator">Mutual Fund Return Calculator</a>
+                                <a href="#" data-calculator="bond-yield-calculator">Bond Yield Calculator</a>
+                                <a href="#" data-calculator="portfolio-growth-calculator">Portfolio Growth Calculator</a>
+                                <a href="#" data-calculator="dividend-calculator">Dividend Calculator</a>
+                                <a href="#" data-calculator="capital-gains-tax-calculator-investment">Capital Gains Tax Calculator</a>
+                                <a href="#" data-calculator="dollar-cost-averaging-calculator">Dollar-Cost Averaging Calculator</a>
+                            </div>
+                            <div class="submenu-divider"></div>
+
+                            <a href="#" class="submenu-header">Savings Calculators <i class="fas fa-caret-right"></i></a>
+                            <div class="submenu-content">
+                                <a href="#" data-calculator="future-value-of-savings">Future Value of Savings</a>
+                                <a href="#" data-calculator="recurring-deposit-calculator">Recurring Deposit Calculator</a>
+                                <a href="#" data-calculator="compound-interest-calculator">Compound Interest Calculator</a>
+                                <a href="#" data-calculator="simple-interest-calculator">Simple Interest Calculator</a>
+                                <a href="#" data-calculator="emergency-fund-calculator">Emergency Fund Calculator</a>
+                                <a href="#" data-calculator="savings-goal-tracker">Savings Goal Tracker</a>
+                            </div>
+                            <div class="submenu-divider"></div>
+
+                            <a href="#" class="submenu-header">Retirement Calculators <i class="fas fa-caret-right"></i></a>
+                            <div class="submenu-content">
+                                <a href="#" data-calculator="retirement-corpus-calculator">Retirement Corpus Calculator</a>
+                                <a href="#" data-calculator="401k-growth-calculator">401(k) Growth Calculator</a>
+                                <a href="#" data-calculator="ira-calculator">IRA (Traditional/Roth) Calculator</a>
+                                <a href="#" data-calculator="pension-calculator">Pension Calculator</a>
+                                <a href="#" data-calculator="annuity-calculator">Annuity Calculator</a>
+                                <a href="#" data-calculator="social-security-estimator">Social Security Estimator (US)</a>
                             </div>
                         </div>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+                        <a href="#" data-calculator="statistical-software">Statistical Calculator / Software</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="dropbtn">
+                        <i class="fas fa-industry"></i> Industry and Professional Use <i class="fas fa-caret-down"></i>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="#" class="submenu-header">Financial & Business Calculators <i class="fas fa-caret-right"></i></a>
+                        <div class="submenu-content">
+                            <a href="#" class="submenu-header">Budget and Expense <i class="fas fa-caret-right"></i></a>
+                            <div class="submenu-content">
+                                <a href="#" data-calculator="monthly-budget-planner">Monthly Budget Planner</a>
+                                <a href="#" data-calculator="expense-split-calculator">Expense Split Calculator</a>
+                                <a href="#" data-calculator="zero-based-budget-calculator">Zero-Based Budget Calculator</a>
+                                <a href="#" data-calculator="50-30-20-rule-calculator">50/30/20 Rule Calculator</a>
+                                <a href="#" data-calculator="cash-flow-calculator">Cash Flow Calculator</a>
+                            </div>
+                            <div class="submenu-divider"></div>
+
+                            <a href="#" class="submenu-header">Tax Calculators <i class="fas fa-caret-right"></i></a>
+                            <div class="submenu-content">
+                                <a href="#" data-calculator="income-tax-calculator">Income Tax Calculator</a>
+                                <a href="#" data-calculator="capital-gains-tax-calculator-general">Capital Gains Tax Calculator</a>
+                                <a href="#" data-calculator="gst-vat-calculator">GST/VAT Calculator</a>
+                                <a href="#" data-calculator="self-employment-tax-estimator">Self-Employment Tax Estimator</a>
+                                <a href="#" data-calculator="tax-withholding-estimator">Tax Withholding Estimator (W-4 Tool for US)</a>
+                            </div>
+                            <div class="submenu-divider"></div>
+
+                            <a href="#" class="submenu-header">Business Finance Calculators <i class="fas fa-caret-right"></i></a>
+                            <div class="submenu-content">
+                                <a href="#" data-calculator="break-even-analysis">Break-Even Analysis</a>
+                                <a href="#" data-calculator="profit-margin-calculator">Profit Margin Calculator</a>
+                                <a href="#" data-calculator="markup-calculator">Markup Calculator</a>
+                                <a href="#" data-calculator="operating-expense-ratio">Operating Expense Ratio</a>
+                                <a href="#" data-calculator="working-capital-calculator">Working Capital Calculator</a>
+                                <a href="#" data-calculator="inventory-turnover-calculator">Inventory Turnover Calculator</a>
+                            </div>
+                            <div class="submenu-divider"></div>
+
+                            <a href="#" class="submenu-header">Real Estate Calculators <i class="fas fa-caret-right"></i></a>
+                            <div class="submenu-content">
+                                <a href="#" data-calculator="mortgage-affordability-calculator">Mortgage Affordability Calculator</a>
+                                <a href="#" data-calculator="rent-vs-buy-calculator">Rent vs. Buy Calculator</a>
+                                <a href="#" data-calculator="property-tax-estimator">Property Tax Estimator</a>
+                                <a href="#" data-calculator="home-equity-calculator">Home Equity Calculator</a>
+                                <a href="#" data-calculator="rental-yield-calculator">Rental Yield Calculator</a>
+                                <a href="#" data-calculator="roi-on-property-investment">ROI on Property Investment</a>
+                            </div>
+                            <div class="submenu-divider"></div>
+
+                            <a href="#" class="submenu-header">Credit and Debt Calculators <i class="fas fa-caret-right"></i></a>
+                            <div class="submenu-content">
+                                <a href="#" data-calculator="debt-payoff-calculator">Debt Payoff Calculator (Avalanche/Snowball)</a>
+                                <a href="#" data-calculator="credit-card-interest-calculator">Credit Card Interest Calculator</a>
+                                <a href="#" data-calculator="debt-to-income-ratio-calculator">Debt-to-Income Ratio Calculator</a>
+                                <a href="#" data-calculator="minimum-payment-calculator">Minimum Payment Calculator</a>
+                                <a href="#" data-calculator="credit-score-impact-estimator">Credit Score Impact Estimator</a>
+                            </div>
+                            <div class="submenu-divider"></div>
+
+                            <a href="#" class="submenu-header">Currency & Inflation Calculators <i class="fas fa-caret-right"></i></a>
+                            <div class="submenu-content">
+                                <a href="#" data-calculator="currency-converter">Currency Converter</a>
+                                <a href="#" data-calculator="inflation-adjustment-calculator">Inflation Adjustment Calculator</a>
+                                <a href="#" data-calculator="purchasing-power-calculator">Purchasing Power Calculator</a>
+                                <a href="#" data-calculator="cost-of-living-comparison">Cost of Living Comparison</a>
+                            </div>
+                            <div class="submenu-divider"></div>
+
+                            <a href="#" class="submenu-header">Education Planning Calculators <i class="fas fa-caret-right"></i></a>
+                            <div class="submenu-content">
+                                <a href="#" data-calculator="college-savings-calculator">College Savings Calculator</a>
+                                <a href="#" data-calculator="education-loan-emi-calculator">Education Loan EMI Calculator</a>
+                                <a href="#" data-calculator="529-plan-estimator">529 Plan Estimator (US)</a>
+                            </div>
+                            <div class="submenu-divider"></div>
+
+                            <a href="#" class="submenu-header">Insurance Calculators <i class="fas fa-caret-right"></i></a>
+                            <div class="submenu-content">
+                                <a href="#" data-calculator="life-insurance-needs-calculator">Life Insurance Needs Calculator</a>
+                                <a href="#" data-calculator="health-insurance-premium-estimator">Health Insurance Premium Estimator</a>
+                                <a href="#" data-calculator="term-plan-calculator">Term Plan Calculator</a>
+                                <a href="#" data-calculator="car-insurance-estimator">Car Insurance Estimator</a>
+                            </div>
+                        </div>
+                        <a href="#" data-calculator="engineering-calculator">Engineering Calculators</a>
+                        <a href="#" data-calculator="programmable-calculator">Programmable Calculator</a>
+                        <a href="#" data-calculator="construction-calculator">Construction Calculators</a>
+                        <div class="submenu-divider"></div>
+                        <a href="#" class="submenu-header">Specialty Calculators <i class="fas fa-caret-right"></i></a>
+                        <div class="submenu-content">
+                            <a href="#" data-calculator="medical-calculator">Medical Calculators</a>
+                            <a href="#" data-calculator="statistical-actuarial-calculator">Statistical/Actuarial Calculators</a>
+                            <a href="#" data-calculator="chemistry-calculator">Chemistry Calculators</a>
+                            <a href="#" data-calculator="astronomical-calculator">Astronomical Calculators</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </nav>
     </header>
 
-    <main class="main-content container">
-        <section id="calculator-display" class="calculator-display">
-            <h2 class="display-title">Welcome to the Calculator Hub!</h2>
-            <p class="display-intro">Select a calculator from the navigation menu above to get started. Previews will appear here when you hover over a calculator type.</p>
+    <main class="main-content">
+        <section class="calculator-section">
+            <h2>Selected Calculator</h2>
+            <div id="active-calculator" class="calculator-display">
+                <p>Select a calculator from the menu above to get started!</p>
+            </div>
+        </section>
 
-            <div id="preview-area" class="preview-area">
-                </div>
-
-            <div id="active-calculator" class="active-calculator">
-                <div class="placeholder-calculator">
-                    <h3>No Calculator Selected</h3>
-                    <p>Your selected calculator will appear here. For a fully functional website, you would implement the calculator's logic (HTML, CSS, JS) within these sections.</p>
-                </div>
+        <section class="preview-section">
+            <h2>Calculator Preview</h2>
+            <div id="preview-area" class="preview-display">
+                <div>Hover over a calculator type to see its preview here.</div>
             </div>
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Calculator Hub. All rights reserved.</p>
-        </div>
+    <footer class="main-footer">
+        <p>&copy; 2025 ProCalc Hub. All rights reserved.</p>
     </footer>
 
     <script src="script.js"></script>
