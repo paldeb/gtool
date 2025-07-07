@@ -1,50 +1,41 @@
-/* General Body and Container Styles */
-body {
-    font-family: 'Roboto', sans-serif;
+/* General Body and HTML Reset */
+html, body {
     margin: 0;
     padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f4f7f6;
     color: #333;
     line-height: 1.6;
+    scroll-behavior: smooth;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* Header Styles */
-.header {
-    background-color: #2c3e50; /* Dark blue/grey */
+/* Header Styling */
+.main-header {
+    background-color: #2c3e50; /* Dark blue-grey */
     color: #ecf0f1; /* Light grey */
-    padding: 20px 0;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 15px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .logo {
-    margin: 0;
     font-size: 1.8em;
-    font-weight: 700;
+    font-weight: bold;
     display: flex;
     align-items: center;
 }
 
 .logo i {
     margin-right: 10px;
-    color: #3498db; /* Bright blue */
+    color: #3498db; /* Blue accent */
 }
 
-/* Navigation Styles */
+/* Navigation Bar */
 .main-nav .nav-list {
     list-style: none;
     margin: 0;
@@ -52,54 +43,49 @@ body {
     display: flex;
 }
 
-.main-nav .nav-item {
-    position: relative;
-    margin-left: 30px;
+.nav-item {
+    position: relative; /* Essential for dropdown positioning */
+    margin: 0 15px;
 }
 
-.main-nav .nav-item .dropbtn {
+.dropbtn {
     display: block;
     color: #ecf0f1;
+    text-align: center;
+    padding: 14px 16px;
     text-decoration: none;
-    padding: 10px 0;
-    font-weight: 500;
-    transition: color 0.3s ease;
-    display: flex;
-    align-items: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: 5px;
+    white-space: nowrap; /* Prevent text wrapping */
 }
 
-.main-nav .nav-item .dropbtn i {
+.dropbtn:hover, .nav-item.active .dropbtn {
+    background-color: #34495e; /* Slightly lighter dark blue */
+    color: #ffffff;
+}
+
+.dropbtn i {
     margin-right: 8px;
 }
 
-.main-nav .nav-item .dropbtn:hover {
-    color: #3498db;
+.dropbtn .fa-caret-down {
+    margin-left: 5px;
 }
 
-/* Dropdown Content */
+/* Dropdown Content (Main menu) */
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #34495e; /* Slightly lighter dark blue */
-    min-width: 250px;
+    background-color: #34495e; /* Darker blue-grey for dropdown */
+    min-width: 280px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 10;
+    z-index: 1;
     border-radius: 5px;
-    overflow: hidden;
-    left: 0;
-    top: 100%; /* Position below the parent */
+    padding: 10px 0;
     opacity: 0;
     visibility: hidden;
     transform: translateY(10px);
     transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-}
-
-.nav-item.active .dropdown-content,
-.dropdown:hover .dropdown-content {
-    display: block;
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
 }
 
 .dropdown-content a {
@@ -107,13 +93,23 @@ body {
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+    text-align: left;
     transition: background-color 0.2s ease, color 0.2s ease;
-    white-space: nowrap; /* Prevent wrapping */
+    white-space: nowrap;
 }
 
 .dropdown-content a:hover {
-    background-color: #3498db;
-    color: #fff;
+    background-color: #2c3e50; /* Darker on hover */
+    color: #3498db; /* Blue accent on hover */
+}
+
+/* Show the dropdown menu on hover or when parent .nav-item is active */
+.nav-item.dropdown:hover .dropdown-content,
+.nav-item.dropdown.active .dropdown-content {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
 }
 
 /* Submenu styles (for nested dropdowns) */
@@ -124,7 +120,7 @@ body {
 }
 
 .submenu-header {
-    color: #bdc3c7; /* Lighter grey */
+    color: #bdc3c7; /* Lighter grey for headers */
     padding: 12px 16px;
     display: block;
     cursor: default;
@@ -132,7 +128,12 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: relative; /* Crucial: Make submenu-header a positioning context */
+    position: relative; /* Crucial: Make submenu-header a positioning context for its child submenu-content */
+}
+
+.submenu-header .fa-caret-right {
+    margin-left: 10px;
+    transition: transform 0.3s ease;
 }
 
 /* Base style for submenu content */
@@ -140,7 +141,7 @@ body {
     display: none;
     position: absolute;
     background-color: #46627f; /* Even lighter dark blue for submenu */
-    min-width: 250px;
+    min-width: 280px; /* Match parent dropdown width */
     left: 100%; /* Position to the right of the parent */
     top: 0; /* Align with the top of the submenu-header */
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -149,33 +150,267 @@ body {
     visibility: hidden;
     transform: translateX(10px);
     transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    padding: 10px 0; /* Add padding consistent with main dropdown */
 }
 
-/* When parent .dropdown-content is hovered, show its immediate .submenu-content */
-.dropdown-content .submenu-header:hover + .submenu-content,
-.dropdown-content .submenu-content:hover { /* This line helps keep the submenu open if mouse moves onto it */
+/* When a .submenu-header is hovered, show its immediate .submenu-content sibling */
+.submenu-header:hover > .submenu-content, /* Direct child of hovered submenu-header */
+.submenu-content:hover { /* This allows moving mouse onto the submenu-content to keep it open */
     display: block;
     opacity: 1;
     visibility: visible;
     transform: translateX(0);
 }
 
-/* IMPORTANT: For nested submenus (submenu-content within another submenu-content) */
-/* When a .submenu-content's .submenu-header is hovered, show its immediate .submenu-content sibling */
-.submenu-content .submenu-header:hover + .submenu-content,
-.submenu-content .submenu-content:hover { /* Keeps nested submenu open */
-    display: block;
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(0);
-    /* Ensure background is distinct for nested levels if desired */
+/* Style for nested submenu-content (deeper levels) */
+.submenu-content .submenu-content {
     background-color: #5d7a96; /* Slightly different background for further nesting */
 }
 
-/* On small screens, stack submenus */
-@media (max-width: 480px) {
-    .submenu-content {
+.submenu-content .submenu-content .submenu-content {
+    background-color: #6e8fa8; /* Even lighter for deeper nesting */
+}
+
+/* Rotate caret on hover for submenus */
+.submenu-header:hover .fa-caret-right {
+    transform: rotate(90deg);
+}
+
+
+/* Main Content Styling */
+.main-content {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    display: grid;
+    grid-template-columns: 1fr; /* Default to single column */
+    gap: 30px;
+}
+
+/* Sections within Main Content */
+.calculator-section, .preview-section {
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #fcfcfc;
+}
+
+h2 {
+    color: #2c3e50;
+    font-size: 1.8em;
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+}
+
+.calculator-display {
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    font-size: 1.1em;
+    flex-direction: column;
+}
+
+.preview-display {
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    font-size: 1em;
+    background-color: #eaf3f7;
+    border: 1px dashed #a0d4eb;
+    border-radius: 8px;
+}
+
+.calculator-preview-content {
+    padding: 10px;
+}
+
+.calculator-preview-content h4 {
+    margin-top: 0;
+    color: #34495e;
+}
+
+.calculator-preview-content p {
+    font-size: 0.9em;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.calculator-preview-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Placeholder Calculator Styles */
+.placeholder-calculator {
+    padding: 20px;
+    background-color: #eaf7ed;
+    border: 1px solid #d4edda;
+    border-radius: 5px;
+    color: #155724;
+}
+
+.placeholder-calculator h3 {
+    color: #218838;
+    margin-top: 0;
+}
+
+.placeholder-calculator p {
+    margin-bottom: 10px;
+}
+
+/* Basic Calculator Specific Styles (example) */
+.calculator-container.calculator-basic {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    max-width: 300px;
+    margin: 20px auto;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #333;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.calculator-container.calculator-basic .display {
+    grid-column: span 4;
+    background-color: #222;
+    color: #fff;
+    padding: 15px;
+    font-size: 2.5em;
+    text-align: right;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.calculator-container.calculator-basic button {
+    padding: 15px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 5px;
+    background-color: #555;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.calculator-container.calculator-basic button:hover {
+    background-color: #777;
+}
+
+.calculator-container.calculator-basic button.operator {
+    background-color: #f39c12; /* Orange */
+}
+
+.calculator-container.calculator-basic button.operator:hover {
+    background-color: #e67e22; /* Darker orange */
+}
+
+.calculator-container.calculator-basic button.clear {
+    background-color: #e74c3c; /* Red */
+}
+
+.calculator-container.calculator-basic button.clear:hover {
+    background-color: #c0392b; /* Darker red */
+}
+
+.calculator-container.calculator-basic button.equals {
+    background-color: #27ae60; /* Green */
+    grid-column: span 2; /* Make equals button wider */
+}
+
+.calculator-container.calculator-basic button.equals:hover {
+    background-color: #229954; /* Darker green */
+}
+
+/* Footer Styling */
+.main-footer {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+    .main-content {
+        grid-template-columns: 2fr 1fr; /* Two columns on larger screens */
+    }
+}
+
+@media (max-width: 767px) {
+    .main-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-bottom: 10px;
+    }
+
+    .main-nav {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .main-nav .nav-list {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .nav-item {
+        margin: 0;
+        width: 100%;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .dropbtn {
+        padding: 12px 15px;
+        width: 100%;
+        text-align: left;
+    }
+
+    /* Adjust dropdown content for mobile */
+    .dropdown-content {
         position: static; /* Stack dropdowns on small screens */
+        width: 100%;
+        box-shadow: none;
+        border-radius: 0;
+        transform: none;
+        opacity: 1; /* Always visible when active on small screens */
+        visibility: visible;
+        background-color: #3e566a; /* Slightly lighter for mobile dropdown */
+        padding-left: 15px; /* Indent main dropdown items */
+    }
+
+    .dropdown-content a {
+        padding: 10px 15px;
+    }
+
+    /* Submenu on small screens */
+    .submenu-header {
+        padding: 10px 15px;
+        color: #ecf0f1; /* Headers also light on mobile */
+        background-color: #46627f; /* Slightly different background for mobile submenu headers */
+        border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .submenu-content {
+        position: static; /* Stack submenus on small screens */
         width: 100%;
         box-shadow: none;
         border-radius: 0;
@@ -191,268 +426,11 @@ body {
         padding-left: 40px; /* Further indent for nested submenus */
         background-color: #6e8fa8; /* Even lighter for further nesting */
     }
-}
 
-
-/* Main Content Area */
-.main-content {
-    padding: 40px 0;
-    min-height: 600px;
-}
-
-.calculator-display {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-    padding: 30px;
-    text-align: center;
-}
-
-.display-title {
-    color: #2c3e50;
-    font-size: 2.2em;
-    margin-bottom: 15px;
-}
-
-.display-intro {
-    color: #555;
-    font-size: 1.1em;
-    margin-bottom: 30px;
-}
-
-/* Preview Area */
-.preview-area {
-    min-height: 150px; /* Adjust as needed */
-    background-color: #e9f0f3;
-    border-radius: 6px;
-    padding: 20px;
-    margin-bottom: 30px;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #777;
-    font-style: italic;
-    font-size: 1.0em;
-    text-align: center;
-    position: relative; /* For preview content positioning */
-}
-
-.preview-area h4 {
-    margin-top: 0;
-    color: #3498db;
-    font-size: 1.3em;
-}
-
-.preview-area p {
-    font-size: 0.9em;
-    color: #555;
-}
-
-.preview-content {
-    animation: fadeIn 0.5s ease-in-out forwards;
-}
-
-/* Active Calculator Display */
-.active-calculator {
-    min-height: 400px; /* Space for the calculator */
-    background-color: #fdfdfd;
-    border: 1px solid #dbe4eb;
-    border-radius: 6px;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    animation: fadeIn 0.7s ease-in-out forwards;
-}
-
-.placeholder-calculator {
-    text-align: center;
-    color: #888;
-    padding: 20px;
-}
-
-.placeholder-calculator h3 {
-    color: #666;
-    margin-bottom: 10px;
-}
-
-/* Basic Calculator Example (for demonstration purposes) */
-.calculator-basic {
-    background-color: #ecf0f1;
-    border: 1px solid #bdc3c7;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    width: 280px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-}
-
-.calculator-basic .display {
-    grid-column: 1 / -1;
-    background-color: #7f8c8d;
-    color: #fff;
-    font-size: 2.5em;
-    padding: 15px;
-    border-radius: 5px;
-    text-align: right;
-    margin-bottom: 10px;
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-.calculator-basic button {
-    background-color: #95a5a6;
-    color: #fff;
-    border: none;
-    padding: 15px;
-    font-size: 1.2em;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-.calculator-basic button:hover {
-    background-color: #7f8c8d;
-}
-
-.calculator-basic button.operator {
-    background-color: #f39c12; /* Orange */
-}
-
-.calculator-basic button.operator:hover {
-    background-color: #e67e22;
-}
-
-.calculator-basic button.clear {
-    background-color: #e74c3c; /* Red */
-}
-
-.calculator-basic button.clear:hover {
-    background-color: #c0392b;
-}
-
-.calculator-basic button.equals {
-    background-color: #27ae60; /* Green */
-    grid-column: span 2;
-}
-
-.calculator-basic button.equals:hover {
-    background-color: #229954;
-}
-
-
-/* Footer Styles */
-.footer {
-    background-color: #2c3e50;
-    color: #bdc3c7;
-    text-align: center;
-    padding: 20px 0;
-    margin-top: 40px;
-    box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
-}
-
-/* Animations */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
+    .submenu-header .fa-caret-right {
+        transform: rotate(0deg); /* Reset rotation on mobile */
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Responsive Design */
-@media (max-width: 900px) {
-    .main-nav .nav-list {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .main-nav .nav-item {
-        margin: 0 15px 10px 15px;
-    }
-}
-
-@media (max-width: 768px) {
-    .header .container {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .logo {
-        margin-bottom: 15px;
-    }
-
-    .main-nav .nav-item {
-        margin: 0 10px 10px 10px;
-    }
-
-    .dropdown-content {
-        min-width: 180px;
-        left: 50%;
-        transform: translateX(-50%) translateY(10px);
-    }
-
-    .submenu-content {
-        left: 0;
-        top: 100%;
-        transform: translateX(0) translateY(10px);
-    }
-}
-
-@media (max-width: 480px) {
-    .logo {
-        font-size: 1.5em;
-    }
-
-    .main-nav .nav-item {
-        width: 100%;
-        text-align: center;
-        margin-left: 0;
-    }
-
-    .main-nav .nav-item .dropbtn {
-        justify-content: center;
-        padding: 10px 20px;
-    }
-
-    .dropdown-content {
-        position: static; /* Stack dropdowns on small screens */
-        width: 100%;
-        box-shadow: none;
-        border-radius: 0;
-        transform: none;
-        opacity: 1; /* Always visible when active on small screens */
-        visibility: visible;
-    }
-
-    .submenu-content {
-        position: static;
-        width: 100%;
-        box-shadow: none;
-        border-radius: 0;
-        transform: none;
-        opacity: 1;
-        visibility: visible;
-        padding-left: 20px; /* Indent submenu items */
-        background-color: #5d7a96; /* Slightly different background for submenu */
-    }
-
-    .calculator-display {
-        padding: 20px;
-    }
-
-    .display-title {
-        font-size: 1.8em;
-    }
-
-    .display-intro {
-        font-size: 1em;
+    .submenu-header:hover .fa-caret-right {
+        transform: rotate(0deg); /* No rotation on mobile */
     }
 }
